@@ -1,1 +1,16 @@
-<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+<p> The AVeriTeC scoring is built on the FEVER scorer. The scoring script can be found on the <a href="https://fever.ai/dataset/AVeriTeC.html">AVeriTeC Dataset page</a>. A detailed explaination of the scoring metric can be found in this <a href="https://arxiv.org/pdf/2305.13117.pdf">paper (section 6.)</a> </p>
+
+
+<p> The FEVEROUS score considers the correct prediction of the verdict as well as the correct retrieval of evidence. A prediction is scored 1 if at least one complete evidence set of the gold evidence is a subset of the predicted evidence <strong> and </strong> the predicted label is correct, else 0.
+
+
+<p>The scorer will produce other diagnostic scores (F1, macro-precision, macro-recall and accuracy). These will not considered for the competition other than to rank two submissions with equal AVeriTeC Scores. </p>
+
+
+<p>For the AVeriTeC score following changes are made to the FEVER scorer: </p>
+
+
+<ul>
+<li> Claims in Fact-Checking datasets are typically supported or refuted by evidence, or there is not enough evidence. We add a fourth class: conflicting evidence/cherry-picking. This covers both conflicting evidence, and technically true claims that mislead by excluding important context, i.e., the claim has both supporting and refuting evidence.
+<li> Unlike in FEVER using a closed source of evidence such as Wikipedia, AVERITEC is intended for use with evidence retrieved from the open web. Since the same evidence may be found in different sources, we cannot rely on exact matching to score retrieved evidence. As such, we instead rely on approximate matching. Specifically, we use the <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/nav.3800020109">Hungarian Algorithm</a> to find an optimal matching of retrieved evidence to gold evidence.
+</ul>
