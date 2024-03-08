@@ -135,3 +135,11 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
         print("Completed evaluation for Test Phase")
 
     return output
+
+
+# if __name__ == "__main__":
+#     test_annotation_file = "annotations/averitec_dev_gold.jsonl"
+#     user_submission_file = "baseline_submission_dev.jsonl"
+#
+#     evaluate(test_annotation_file, user_submission_file, 'dev')
+#     print("hello")
