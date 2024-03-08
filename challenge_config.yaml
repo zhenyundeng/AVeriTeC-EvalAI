@@ -19,7 +19,7 @@ leaderboard:
   - id: 1
     schema:
       {
-        "labels": ["AVeriTeC score", "Label accuracy", "Evidence precision", "Evidence recall", "Evidence F1"],
+        "labels": ["Label accuracy", "Evidence meteor"],
         "default_order_by": "AVeriTeC Score",
       }
 
