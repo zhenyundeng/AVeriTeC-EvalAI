@@ -112,8 +112,8 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
         output["result"] = [
             {
                 "dev_split": {
-                    "Label_accuracy": label_accuracy,
-                    "Evidence_meteor": evidence_meteor,
+                    "Label accuracy": label_accuracy,
+                    "Evidence meteor": evidence_meteor,
                 }
             }
         ]
@@ -125,8 +125,8 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
         output["result"] = [
             {
                 "test_split": {
-                    "Label_accuracy": label_accuracy,
-                    "Evidence_meteor": evidence_meteor,
+                    "Label accuracy": label_accuracy,
+                    "Evidence meteor": evidence_meteor,
                 }
             }
         ]
