@@ -5,7 +5,7 @@ short_description: "The AVeriTeC challenge aims to evaluate the ability of a sys
 description: templates/description.html
 evaluation_details: templates/evaluation_details.html
 terms_and_conditions: templates/terms_and_conditions.html
-image: logo.png
+image: logo.jpg
 submission_guidelines: templates/submission_guidelines.html
 leaderboard_description: "The AVeriTeC leaderbord. The primary metric to evaluate system submissions is the AVeriTeC score. The Evidence F1 score is used to decide ties between systems."
 evaluation_script: evaluation_script.zip
