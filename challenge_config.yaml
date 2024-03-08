@@ -20,7 +20,7 @@ leaderboard:
     schema:
       {
         "labels": ["Label accuracy", "Evidence meteor"],
-        "default_order_by": "AVeriTeC Score",
+        "default_order_by": "Label accuracy",
       }
 
 challenge_phases:
