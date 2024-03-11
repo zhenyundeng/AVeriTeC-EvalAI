@@ -3,7 +3,8 @@ import numpy as np
 import scipy
 import nltk
 from nltk import word_tokenize
-
+# nltk.download('wordnet')
+# nltk.download('omw-1.4')
 
 def compute_all_pairwise_scores(src_data, tgt_data, metric):
     X = np.empty((len(src_data), len(tgt_data)))
@@ -15,19 +16,15 @@ def compute_all_pairwise_scores(src_data, tgt_data, metric):
     return X
 
 
-def averitec_score(predictions):
+def averitec_score(predictions, actual=None, max_evidence=5, max_evidence_cell=25):
     #
-    score_label = 0
-    score_pairwise_evidence = 0
+    score_label1, score_label2, score_label3 = 0, 0, 0
+    score_evidence, score_evidence1, score_evidence2, score_evidence3 = 0, 0, 0, 0
 
     for idx, instance in enumerate(predictions):
         # label
         gold_label = instance['label']
         pred_label = instance['predicted_label']
-
-        if gold_label == pred_label:
-            score_label += 1
-
         # evidence
         gold_evi = instance['evidence']
         pred_evi = instance['predicted_evidence']
@@ -40,10 +37,25 @@ def averitec_score(predictions):
         assignment_utility = pairwise_scores[assignment[0], assignment[1]].sum()
         reweight_term = 1 / float(len(pred_evi))
         assignment_utility *= reweight_term
-        score_pairwise_evidence += assignment_utility
 
-    label_accuracy, evidence_meteor = score_label / len(predictions), score_pairwise_evidence / len(predictions)
-    return label_accuracy, evidence_meteor
+        if assignment_utility >= 0.20:
+            if gold_label == pred_label:
+                score_label1 += 1
+            score_evidence1 += assignment_utility
+        if assignment_utility >= 0.25:
+            if gold_label == pred_label:
+                score_label2 += 1
+            score_evidence2 += assignment_utility
+        if assignment_utility >= 0.30:
+            if gold_label == pred_label:
+                score_label3 += 1
+            score_evidence3 += assignment_utility
+
+    label_accuracy1, evidence_meteor1 = score_label1 / len(predictions), score_evidence1 / len(predictions)
+    label_accuracy2, evidence_meteor2 = score_label2 / len(predictions), score_evidence2 / len(predictions)
+    label_accuracy3, evidence_meteor3 = score_label3 / len(predictions), score_evidence3 / len(predictions)
+
+    return [label_accuracy1, label_accuracy2, label_accuracy3], [evidence_meteor1, evidence_meteor2, evidence_meteor3]
 
 
 def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwargs):
@@ -86,8 +98,6 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
         }
     """
     output = {}
-    # test_samples = json.load(open(test_annotation_file, 'r'))
-    # pred_samples = json.load(open(user_submission_file, 'r'))
     test_samples = [json.loads(l) for l in open(test_annotation_file, 'r').readlines()]
     pred_samples = [json.loads(l) for l in open(user_submission_file, 'r').readlines()]
 
@@ -112,8 +122,12 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
         output["result"] = [
             {
                 "dev_split": {
-                    "Label accuracy": label_accuracy,
-                    "Evidence meteor": evidence_meteor,
+                    "Label_accuracy1": label_accuracy[0],
+                    "Evidence_meteor1": evidence_meteor[0],
+                    "Label_accuracy2": label_accuracy[1],
+                    "Evidence_meteor2": evidence_meteor[1],
+                    "Label_accuracy3": label_accuracy[2],
+                    "Evidence_meteor3": evidence_meteor[2],
                 }
             }
         ]
@@ -125,8 +139,12 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
         output["result"] = [
             {
                 "test_split": {
-                    "Label accuracy": label_accuracy,
-                    "Evidence meteor": evidence_meteor,
+                    "Label_accuracy1": label_accuracy[0],
+                    "Evidence_meteor1": evidence_meteor[0],
+                    "Label_accuracy2": label_accuracy[1],
+                    "Evidence_meteor2": evidence_meteor[1],
+                    "Label_accuracy3": label_accuracy[2],
+                    "Evidence_meteor3": evidence_meteor[2],
                 }
             }
         ]
