@@ -3,8 +3,8 @@ import numpy as np
 import scipy
 import nltk
 from nltk import word_tokenize
-# nltk.download('wordnet')
-# nltk.download('omw-1.4')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
 
 def compute_all_pairwise_scores(src_data, tgt_data, metric):
     X = np.empty((len(src_data), len(tgt_data)))
