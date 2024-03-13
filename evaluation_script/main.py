@@ -122,12 +122,14 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
         output["result"] = [
             {
                 "dev_split": {
-                    "Label_accuracy1": label_accuracy[0],
-                    "Evidence_meteor1": evidence_meteor[0],
-                    "Label_accuracy2": label_accuracy[1],
-                    "Evidence_meteor2": evidence_meteor[1],
-                    "Label_accuracy3": label_accuracy[2],
-                    "Evidence_meteor3": evidence_meteor[2],
+                    "Label accuracy": label_accuracy[1],
+                    "Evidence meteor": evidence_meteor[1],
+                    # "Label accuracy1": label_accuracy[0],
+                    # "Evidence meteor1": evidence_meteor[0],
+                    # "Label accuracy2": label_accuracy[1],
+                    # "Evidence meteor2": evidence_meteor[1],
+                    # "Label accuracy3": label_accuracy[2],
+                    # "Evidence meteor3": evidence_meteor[2],
                 }
             }
         ]
@@ -139,12 +141,14 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
         output["result"] = [
             {
                 "test_split": {
-                    "Label_accuracy1": label_accuracy[0],
-                    "Evidence_meteor1": evidence_meteor[0],
-                    "Label_accuracy2": label_accuracy[1],
-                    "Evidence_meteor2": evidence_meteor[1],
-                    "Label_accuracy3": label_accuracy[2],
-                    "Evidence_meteor3": evidence_meteor[2],
+                    "Label accuracy": label_accuracy[1],
+                    "Evidence meteor": evidence_meteor[1],
+                    # "Label accuracy1": label_accuracy[0],
+                    # "Evidence meteor1": evidence_meteor[0],
+                    # "Label accuracy2": label_accuracy[1],
+                    # "Evidence meteor2": evidence_meteor[1],
+                    # "Label accuracy3": label_accuracy[2],
+                    # "Evidence meteor3": evidence_meteor[2],
                 }
             }
         ]
