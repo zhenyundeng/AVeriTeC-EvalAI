@@ -14,11 +14,12 @@ def run():
     sys.path.append("{}/challenge_data/challenge_1".format(current_working_directory))
 
     challenge_id = 1
-    challenge_phase = "test"  # Add the challenge phase codename to be tested
-    annotation_file_path = "{}/annotations/test_annotations_testsplit.json".format(
+    challenge_phase = "dev"  # Add the challenge phase codename to be tested
+    annotation_file_path = "{}/annotations/averitec_dev_gold.jsonl".format(
         current_working_directory
     )  # Add the test annotation file path
-    user_submission_file_path = "{}/submission.json".format(
+    print(annotation_file_path)
+    user_submission_file_path = "{}/baseline_submission_dev.jsonl".format(
         current_working_directory
     )  # Add the sample submission file path
 
