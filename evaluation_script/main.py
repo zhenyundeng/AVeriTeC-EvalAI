@@ -30,6 +30,26 @@ def averitec_score(predictions, actual=None, max_evidence=5, max_evidence_cell=2
         gold_evi = instance['evidence']
         pred_evi = instance['predicted_evidence']
 
+        if gold_label == pred_label:
+            score_label1 += 1
+
+    label_accuracy = score_label1 / len(predictions)
+    return label_accuracy
+
+
+def averitec_score1(predictions, actual=None, max_evidence=5, max_evidence_cell=25):
+    #
+    score_label1, score_label2, score_label3 = 0, 0, 0
+    score_evidence, score_evidence1, score_evidence2, score_evidence3 = 0, 0, 0, 0
+
+    for idx, instance in enumerate(predictions):
+        # label
+        gold_label = instance['label']
+        pred_label = instance['predicted_label']
+        # evidence
+        gold_evi = instance['evidence']
+        pred_evi = instance['predicted_evidence']
+
         def pairwise_meteor(candidate, reference):  # Todo this is not thread safe, no idea how to make it so
             return nltk.translate.meteor_score.single_meteor_score(word_tokenize(reference), word_tokenize(candidate))
 
@@ -116,15 +136,16 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
 
         annotations.append(annotation)
 
-    label_accuracy, evidence_meteor = averitec_score(annotations)
+    label_accuracy = averitec_score(annotations)
+    # label_accuracy, evidence_meteor = averitec_score(annotations)
 
     if phase_codename == "dev":
         print("Evaluating for Dev Phase")
         output["result"] = [
             {
                 "dev_split": {
-                    "Label accuracy": label_accuracy[1],
-                    "Evidence meteor": evidence_meteor[1],
+                    "Label accuracy": label_accuracy,
+                    # "Evidence meteor": evidence_meteor[1],
                     # "Label accuracy1": label_accuracy[0],
                     # "Evidence meteor1": evidence_meteor[0],
                     # "Label accuracy2": label_accuracy[1],
@@ -142,8 +163,8 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
         output["result"] = [
             {
                 "test_split": {
-                    "Label accuracy": label_accuracy[1],
-                    "Evidence meteor": evidence_meteor[1],
+                    "Label accuracy": label_accuracy,
+                    # "Evidence meteor": evidence_meteor[1],
                     # "Label accuracy1": label_accuracy[0],
                     # "Evidence meteor1": evidence_meteor[0],
                     # "Label accuracy2": label_accuracy[1],
