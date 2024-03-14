@@ -19,7 +19,7 @@ leaderboard:
   - id: 1
     schema:
       {
-        "labels": ["Label accuracy", "Evidence meteor"],
+        "labels": ["Label accuracy"],
         "default_order_by": "Label accuracy",
       }
 
