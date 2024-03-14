@@ -33,13 +33,13 @@ def install_local_package(folder_name):
     ]
 )
 
-install("scipy")
-install("nltk")
-install("numpy")
+# install("scipy")
+# install("nltk")
+# install("numpy")
 
-# install("scipy==1.10.0")
-# install("nltk==3.7")
-# install("numpy==1.23.5")
+install("scipy==1.10.0")
+install("nltk==3.7")
+install("numpy==1.23.5")
 
 # install("shapely==1.7.1")
 # install("requests==2.25.1")
